@@ -14,6 +14,8 @@ return restrictRead("Fusion", {
 	Children = require(script.Instances.Children),
 	OnEvent = require(script.Instances.OnEvent),
 	OnChange = require(script.Instances.OnChange),
+	Attribute = require(script.Instances.Attribute),
+	AttributeChange = require(script.Instances.AttributeChange),
 
 	State = require(script.State.State),
 	Computed = require(script.State.Computed),

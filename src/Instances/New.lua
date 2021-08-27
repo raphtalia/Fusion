@@ -123,13 +123,17 @@ local function New(className: string)
 
 					toConnect[event] = value
 
-				-- Property change handler
-				elseif key.name == "OnChange" then
+				-- Property/Attribute change handler
+				elseif key.name == "OnChange" or key.name == "AttributeChange" then
 					local event
 
 					if
 						not pcall(function()
-							event = ref.instance:GetPropertyChangedSignal(key.key)
+							if key.name == "OnChange" then
+								event = ref.instance:GetPropertyChangedSignal(key.key)
+							elseif key.name == "AttributeChange" then
+								event = ref.instance:GetAttributeChangedSignal(key.key)
+							end
 						end)
 					then
 						logError("cannotConnectChange", nil, className, key.key)
@@ -148,6 +152,10 @@ local function New(className: string)
 						end
 						value(ref.instance[key.key])
 					end
+
+				-- Attribute handler
+				elseif key.name == "Attribute" then
+					ref.instance:SetAttribute(key.key, value)
 
 				-- Unknown symbol key
 				else

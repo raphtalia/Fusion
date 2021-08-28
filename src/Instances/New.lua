@@ -155,7 +155,13 @@ local function New(className: string)
 
 				-- Attribute handler
 				elseif key.name == "Attribute" then
-					ref.instance:SetAttribute(key.key, value)
+					local assignOK = pcall(function()
+						ref.instance:SetAttribute(key.key, value)
+					end)
+
+					if not assignOK then
+						logError("cannotAssignAttribute", nil, key)
+					end
 
 				-- Unknown symbol key
 				else

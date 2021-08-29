@@ -11,6 +11,8 @@ export type Symbol = Types.Symbol
 
 return restrictRead("Fusion", {
 	New = require(script.Instances.New),
+	Lerp = require(script.Animation.lerpType),
+
 	Children = require(script.Instances.Children),
 	OnEvent = require(script.Instances.OnEvent),
 	OnChange = require(script.Instances.OnChange),
@@ -23,5 +25,5 @@ return restrictRead("Fusion", {
 	Compat = require(script.State.Compat),
 
 	Tween = require(script.Animation.Tween),
-	Spring = require(script.Animation.Spring)
+	Spring = require(script.Animation.Spring),
 })

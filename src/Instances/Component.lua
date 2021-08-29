@@ -77,7 +77,12 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
 
     -- Call the init function if defined, must return a Roblox Instance
     if class._init then
-        local rbx = class._init(self)
+        local args = {}
+        for _,v in ipairs(propertyTable) do
+            table.insert(args, v)
+        end
+
+        local rbx = class._init(self, unpack(args))
 
         local type = typeof(rbx)
         if type == "Instance" then

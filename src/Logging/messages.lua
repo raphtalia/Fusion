@@ -17,5 +17,8 @@ return {
 	strictReadError = "'%s' is not a valid member of '%s'.",
 	unknownMessage = "Unknown error: ERROR_MESSAGE",
 	unrecognisedChildType = "'%s' type children aren't accepted as children in `New`.",
-	unrecognisedPropertyKey = "'%s' keys aren't accepted in the property table of `New`"
+	unrecognisedPropertyKey = "'%s' keys aren't accepted in the property table of `New`",
+	stateNotATable = "The value of this state is not a table",
+	stateNotANumber = "The value of this state is not a number",
+	invalidArgument = "Invalid argument #%d to '%s' (%s expected, got %s)",
 }

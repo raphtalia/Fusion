@@ -14,6 +14,62 @@ local class = {}
 local CLASS_METATABLE = {__index = class}
 local WEAK_KEYS_METATABLE = {__mode = "k"}
 
+function CLASS_METATABLE:__unm()
+	if type(self._value) == "number" then
+		return -self._value
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__add(x)
+	if type(self._value) == "number" then
+		return self._value + x
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__sub(x)
+	if type(self._value) == "number" then
+		return self._value - x
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__mul(x)
+	if type(self._value) == "number" then
+		return self._value * x
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__div(x)
+	if type(self._value) == "number" then
+		return self._value / x
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__mod(x)
+	if type(self._value) == "number" then
+		return self._value % x
+	else
+		logError("stateNotANumber")
+	end
+end
+
+function CLASS_METATABLE:__pow(x)
+	if type(self._value) == "number" then
+		return self._value ^ x
+	else
+		logError("stateNotANumber")
+	end
+end
+
 -- Inserts a new value into this state object if its value is a table.
 function class:insert(newValue: any, index: number?)
 	if type(self._value) == "table" then

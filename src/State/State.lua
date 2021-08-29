@@ -163,6 +163,11 @@ function class:set(newValue: any, force: boolean?)
 end
 
 local function State(initialValue: any)
+	if type(initialValue) == "table" and initialValue.type == "State" then
+		-- Simplifies passing a State down chains of components
+		return initialValue
+	end
+
 	local self = setmetatable({
 		type = "State",
 		kind = "State",

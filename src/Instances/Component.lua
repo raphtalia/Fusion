@@ -32,9 +32,11 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
         -- Provides a reference to the Roblox instance
         rbx = nil,
 
+        _initialized = false,
         _class = class,
         _props = {},
         _events = {},
+        _children = {},
     }, OBJECT_METATABLE)
 
     -- Create custom defined events
@@ -91,13 +93,14 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
             logError("componentInitInvalidReturn", nil, type)
         end
     end
+    self._initialized = true
 
     return self
 end
 
 -- Limit indexing to certain areas of the object
 function OBJECT_METATABLE:__index(i)
-    local v = rawget(self, "_props")[i] or rawget(self, "_events")[i] or rawget(self, "_class")._methods[i] or object[i]
+    local v = rawget(self, "_props")[i] or rawget(self, "_events")[i] or rawget(self, "_children")[i] or rawget(self, "_class")._methods[i] or object[i]
 
     if v then
         if type(v) == "table" then
@@ -112,11 +115,13 @@ function OBJECT_METATABLE:__index(i)
     logError("strictReadError", nil, i, "Component")
 end
 
--- Allow only writing to properties
+-- Allow only writing to properties & children if not initialized
 function OBJECT_METATABLE:__newindex(i, v)
     local props = rawget(self, "_props")
     if props[i] then
         props[i]:set(v)
+    elseif not rawget(self, "_initialized") and type(v) == "table" and v.type == "Component" and v.kind == "Object" then
+        rawget(self, "_children")[i] = v
     else
         logError("strictReadError", nil, i, "Component")
     end

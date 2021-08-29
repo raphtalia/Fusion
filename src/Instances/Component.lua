@@ -46,7 +46,6 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
         for _,eventName in ipairs(events) do
             self._events[eventName] = Signal.new()
         end
-        defaultProps[Events] = nil
     end
 
     -- Set the properties

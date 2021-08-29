@@ -1,6 +1,4 @@
 local Package = script.Parent.Parent
-local New = require(script.Parent.New)
-local Children = require(script.Parent.Children)
 local Events = require(script.Parent.Events)
 local State = require(Package.State.State)
 local None = require(Package.Utility.None)
@@ -37,7 +35,6 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
         _class = class,
         _props = {},
         _events = {},
-        _children = {},
     }, OBJECT_METATABLE)
 
     -- Create custom defined events
@@ -89,23 +86,7 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
 
         local type = typeof(rbx)
         if type == "Instance" then
-            -- Return was a single instance
             rawset(self, "rbx", rbx)
-        elseif type == "table" then
-            -- Return was a dictionary of components
-            local instances = {}
-
-            for name, component in pairs(rbx) do
-                self._children[name] = component
-                table.insert(instances, component)
-            end
-
-            rawset(self, "rbx", New("Folder")({
-                -- TODO: Perhaps expose this property somehow
-                Name = "Component",
-
-                [Children] = instances,
-            }))
         else
             logError("componentInitInvalidReturn", nil, type)
         end
@@ -116,7 +97,7 @@ end
 
 -- Limit indexing to certain areas of the object
 function OBJECT_METATABLE:__index(i)
-    local v = rawget(self, "_props")[i] or rawget(self, "_events")[i] or rawget(self, "_children")[i] or rawget(self, "_class")._methods[i] or object[i]
+    local v = rawget(self, "_props")[i] or rawget(self, "_events")[i] or rawget(self, "_class")._methods[i] or object[i]
 
     if v then
         if type(v) == "table" then

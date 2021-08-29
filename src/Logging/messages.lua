@@ -22,7 +22,7 @@ return {
 	stateNotANumber = "The value of this state is not a number",
 	invalidArgument = "Invalid argument #%d to '%s' (%s expected, got %s)",
 	componentInvalidKey = "Invalid key '%s' on Component (function expected, got %s)",
-	componentInitInvalidReturn = "Invalid return type from Component initializer (Instance or table expected, got %s)",
+	componentInitInvalidReturn = "Invalid return type from Component initializer (Instance expected, got %s)",
 	componentNoEvent = "Component has no event '%s'",
 	componentInvalidEventHandler = "Invalid event handler for '%s' on Component (function expected, got %s)",
 }

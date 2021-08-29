@@ -218,7 +218,7 @@ local function New(className: string)
 						end
 
 					elseif childType == "table" then
-						-- could either be an array or state object
+						-- could either be a state object, component, or array
 
 						if child.type == "State" then
 							-- state object
@@ -238,6 +238,10 @@ local function New(className: string)
 									Scheduler.enqueueCallback(updateCurrentlyParented)
 								end)
 							end
+						elseif child.type == "Component" then
+
+							recursiveAddChild(child.rbx)
+
 						else
 							-- array of children
 							for _, subChild in pairs(child) do

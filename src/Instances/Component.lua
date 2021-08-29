@@ -103,18 +103,8 @@ function OBJECT_METATABLE:__index(i)
     local v = rawget(self, "_props")[i] or rawget(self, "_events")[i] or rawget(self, "_children")[i] or rawget(self, "_class")._methods[i] or object[i]
 
     if v then
-        if type(v) == "table" then
-            if v.type == "State" then
-                local value = v:get()
-                if type(value) == "table" then
-                    -- Due to issues with returning a table the State is returned
-                    return v
-                else
-                    return value
-                end
-            elseif v == None then
-                return nil
-            end
+        if type(v) == "table" and v == None then
+            return nil
         end
         return v
     end

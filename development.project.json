@@ -1,0 +1,13 @@
+{
+  "name": "Fusion Development",
+  "tree": {
+    "$className": "DataModel",
+
+    "ReplicatedStorage": {
+      "$className": "ReplicatedStorage",
+      "Fusion": {
+        "$path": "."
+      }
+    }
+  }
+}

@@ -10,8 +10,9 @@ export type StateOrValue = Types.StateOrValue
 export type Symbol = Types.Symbol
 
 return restrictRead("Fusion", {
+	lerp = require(script.Animation.lerpType),
+
 	New = require(script.Instances.New),
-	Lerp = require(script.Animation.lerpType),
 
 	Children = require(script.Instances.Children),
 	OnEvent = require(script.Instances.OnEvent),

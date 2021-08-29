@@ -105,7 +105,13 @@ function OBJECT_METATABLE:__index(i)
     if v then
         if type(v) == "table" then
             if v.type == "State" then
-                return v:get()
+                local value = v:get()
+                if type(value) == "table" then
+                    -- Due to issues with returning a table the State is returned
+                    return v
+                else
+                    return value
+                end
             elseif v == None then
                 return nil
             end

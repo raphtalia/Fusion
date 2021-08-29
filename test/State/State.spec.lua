@@ -60,4 +60,47 @@ return function()
 		expect(state:get()[2]).to.equal(2)
 		expect(state:get()[3]).to.equal(1)
 	end)
+
+	it("should error if trying to use operators on a non-number state", function()
+		local state = State()
+
+		expect(function()
+			return -state
+		end).to.throw()
+
+		expect(function()
+			return state + 10
+		end).to.throw()
+
+		expect(function()
+			return state - 10
+		end).to.throw()
+
+		expect(function()
+			return state * 10
+		end).to.throw()
+
+		expect(function()
+			return state / 10
+		end).to.throw()
+
+		expect(function()
+			return state % 10
+		end).to.throw()
+
+		expect(function()
+			return state ^ 10
+		end).to.throw()
+	end)
+
+	it("should be able to use operators on a number state", function()
+		local state = State(1)
+
+		expect(state + 10).to.equal(11)
+		expect(state - 10).to.equal(-9)
+		expect(state * 10).to.equal(10)
+		expect(state / 10).to.equal(0.1)
+		expect(state % 10).to.equal(1)
+		expect(state ^ 10).to.equal(1)
+	end)
 end

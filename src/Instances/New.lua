@@ -165,12 +165,12 @@ local function New(className: string)
 
 				-- Unknown symbol key
 				else
-					logError("unrecognisedPropertyKey", nil, key.name)
+					logError("unrecognisedPropertyKey", nil, key.name, "Key")
 				end
 
 			-- Unknown key of arbitrary type
 			else
-				logError("unrecognisedPropertyKey", nil, typeof(key))
+				logError("unrecognisedPropertyKey", nil, typeof(key), "Key")
 			end
 		end
 

@@ -12,13 +12,16 @@ export type Symbol = Types.Symbol
 return restrictRead("Fusion", {
 	lerp = require(script.Animation.lerpType),
 
-	New = require(script.Instances.New),
+	None = require(script.Utility.None),
 
+	New = require(script.Instances.New),
 	Children = require(script.Instances.Children),
 	OnEvent = require(script.Instances.OnEvent),
 	OnChange = require(script.Instances.OnChange),
 	Attribute = require(script.Instances.Attribute),
 	AttributeChange = require(script.Instances.AttributeChange),
+	Component = require(script.Instances.Component),
+	Events = require(script.Instances.Events),
 
 	State = require(script.State.State),
 	Computed = require(script.State.Computed),

@@ -14,6 +14,10 @@ local class = {}
 local CLASS_METATABLE = {__index = class}
 local WEAK_KEYS_METATABLE = {__mode = "k"}
 
+function CLASS_METATABLE:__tostring()
+	return ("State(%s)"):format(tostring(self._value))
+end
+
 function CLASS_METATABLE:__unm()
 	if type(self._value) == "number" then
 		return -self._value

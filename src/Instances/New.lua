@@ -68,12 +68,31 @@ local function New(className: string)
 
 				-- Properties bound to state
 				if typeof(value) == "table" and value.type == "State" then
-					local assignOK = pcall(function()
-						ref.instance[key] = value:get(false)
-					end)
+					do
+						-- Attempt property update
+						local newValue = value:get(false)
+						local getOK, currentValue = pcall(function()
+							return ref.instance[key]
+						end)
 
-					if not assignOK then
-						logError("cannotAssignProperty", nil, className, key)
+						if getOK then
+							local typeCurrent = typeof(currentValue)
+							local typeNew = typeof(newValue)
+
+							if typeCurrent ~= typeNew then
+								logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+							end
+						else
+							logError("cannotAssignProperty", nil, className, key)
+						end
+
+						local assignOK = pcall(function()
+							ref.instance[key] = newValue
+						end)
+
+						if not assignOK then
+							logError("cannotAssignPropertyPermissionError", nil, className, key)
+						end
 					end
 
 					table.insert(cleanupTasks,
@@ -94,12 +113,30 @@ local function New(className: string)
 
 				-- Properties with constant values
 				else
-					local assignOK = pcall(function()
-						ref.instance[key] = value
-					end)
+					do
+						-- Attempt property update
+						local getOK, currentValue = pcall(function()
+							return ref.instance[key]
+						end)
 
-					if not assignOK then
-						logError("cannotAssignProperty", nil, className, key)
+						if getOK then
+							local typeCurrent = typeof(currentValue)
+							local typeNew = typeof(value)
+
+							if typeCurrent ~= typeNew then
+								logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+							end
+						else
+							logError("cannotAssignProperty", nil, className, key)
+						end
+
+						local assignOK = pcall(function()
+							ref.instance[key] = value
+						end)
+
+						if not assignOK then
+							logError("cannotAssignPropertyPermissionError", nil, className, key)
+						end
 					end
 				end
 

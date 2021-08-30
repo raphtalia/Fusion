@@ -4,6 +4,8 @@
 
 return {
 	cannotAssignProperty = "The class type '%s' has no assignable property '%s'.",
+	cannotAssignPropertyTypeMismatch = "Attempt to assign property '%s' on class '%s' (%s expected, got %s)",
+	cannotAssignPropertyPermissionError = "The class type '%s' cannot have its property '%s' assigned to",
 	cannotAssignAttribute = "The attribute '%s' could not be assigned to.",
 	cannotConnectChange = "The %s class doesn't have a property called '%s'.",
 	cannotConnectEvent = "The %s class doesn't have an event called '%s'.",

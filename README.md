@@ -1,6 +1,9 @@
 <p align="center" width="100%">
   <img height="128em" src="/README-logo.png" alt="Fusion logo">
 </p>
+<p align="center" style="color:red">
+This Fusion fork is incompatible with the main Fusion repository and primarily for my personal usage.
+</p>
 <p align="center">
 Fusion is a modern reactive UI library, built specifically for <a href="https://developer.roblox.com/">Roblox</a> and <a href="https://luau-lang.org/">Luau</a>.
 </p>

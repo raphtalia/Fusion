@@ -121,7 +121,19 @@ local function New(className: string)
 						logError("cannotConnectChange", nil, className, key.key)
 					end
 
-					toConnect[event] = value
+					toConnect[event] = function(...)
+						if ref.instance == nil then
+							if ENABLE_EXPERIMENTAL_GC_MODE then
+								if conn.Connected then
+									warn("ref is nil and instance is around!!!")
+								else
+									print("ref is nil, but instance was destroyed")
+								end
+							end
+							return
+						end
+						value(ref.instance, ...)
+					end
 
 				-- Property/Attribute change handler
 				elseif key.name == "OnChange" or key.name == "AttributeChange" then

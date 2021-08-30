@@ -150,7 +150,7 @@ local function New(className: string)
 							end
 							return
 						end
-						value(ref.instance[key.key])
+						value(ref.instance, ref.instance[key.key])
 					end
 
 				-- Attribute handler

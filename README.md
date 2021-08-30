@@ -1,7 +1,7 @@
 <p align="center" width="100%">
   <img height="128em" src="/README-logo.png" alt="Fusion logo">
 </p>
-<p align="center" style="color:red">
+<p align="center">
 This Fusion fork is incompatible with the main Fusion repository and primarily for my personal usage.
 </p>
 <p align="center">

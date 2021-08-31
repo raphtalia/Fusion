@@ -35,9 +35,16 @@ local function New(className: string)
 		local conn
 
 		do
-			local createOK, instance = pcall(Instance.new, className)
-			if not createOK then
-				logError("cannotCreateClass", nil, className)
+			local instance
+			-- TODO: Add support for more instances not created through Instance.new
+			if className == "DockWidgetPluginGui" then
+				instance = plugin:CreateDockWidgetPluginGui()
+			else
+				local createOK
+				createOK, instance = pcall(Instance.new, className)
+				if not createOK then
+					logError("cannotCreateClass", nil, className)
+				end
 			end
 
 			local defaultClassProps = defaultProps[className]

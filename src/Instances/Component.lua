@@ -122,7 +122,7 @@ function OBJECT_METATABLE:__newindex(i, v)
     end
 end
 
-function object:Destroy()
+function object:destroy()
     setmetatable(self, nil)
 
     for _,event in ipairs(self._events) do

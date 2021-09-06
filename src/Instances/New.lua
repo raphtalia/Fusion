@@ -83,11 +83,14 @@ local function New(className: string)
 						end)
 
 						if getOK then
-							local typeCurrent = typeof(currentValue)
-							local typeNew = typeof(newValue)
+							-- No typechecking if current value is nil
+							if currentValue ~= nil then
+								local typeCurrent = typeof(currentValue)
+								local typeNew = typeof(newValue)
 
-							if typeCurrent ~= typeNew then
-								logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+								if typeCurrent ~= typeNew then
+									logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+								end
 							end
 						else
 							logError("cannotAssignProperty", nil, className, key)
@@ -127,11 +130,14 @@ local function New(className: string)
 						end)
 
 						if getOK then
-							local typeCurrent = typeof(currentValue)
-							local typeNew = typeof(value)
+							-- No typechecking if current value is nil
+							if currentValue ~= nil then
+								local typeCurrent = typeof(currentValue)
+								local typeNew = typeof(value)
 
-							if typeCurrent ~= typeNew then
-								logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+								if typeCurrent ~= typeNew then
+									logError("cannotAssignPropertyTypeMismatch", nil, key, className, typeCurrent, typeNew)
+								end
 							end
 						else
 							logError("cannotAssignProperty", nil, className, key)

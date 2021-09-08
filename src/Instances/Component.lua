@@ -51,7 +51,13 @@ function CLASS_METATABLE.__call(class, propertyTable: {[string | Types.Symbol]: 
     -- Set the properties
     for i,v in pairs(defaultProps) do
         if type(i) == "string" then
-            self._props[i] = State(propertyTable[i] or v)
+            local value = propertyTable[i] or v
+
+            if value == None then
+                value = nil
+            end
+
+            self._props[i] = State(value)
         end
     end
 
@@ -112,10 +118,13 @@ end
 
 -- Allow only writing to properties & children if not initialized
 function OBJECT_METATABLE:__newindex(i, v)
+    --[[
     local props = rawget(self, "_props")
     if props[i] then
         props[i]:set(v)
-    elseif not rawget(self, "_initialized") and type(v) == "table" and v.type == "Component" and v.kind == "Object" then
+    else
+    ]]
+    if not rawget(self, "_initialized") and type(v) == "table" and v.type == "Component" and v.kind == "Object" then
         rawget(self, "_children")[i] = v
     else
         logError("strictReadError", nil, i, "Component")
